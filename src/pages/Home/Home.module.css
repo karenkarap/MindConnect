@@ -1,0 +1,74 @@
+.heroSection {
+    padding: 78px 0 100px;
+    background: linear-gradient(to right bottom,
+                #fbfbfb,
+                rgba(84, 190, 150, 0.1));
+}
+
+.wrapper {
+    display: flex;
+    gap: 125px;
+}
+
+.title {
+    font-weight: var(--font-weight-semibold);
+    font-size: 80px;
+    line-height: 1.025;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+
+.accent {
+    color: var(--color-main-theme);
+    font-style: italic;
+}
+
+.text {
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 1.33;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+}
+
+.button {
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+    background-color: var(--color-main-theme);
+    color: #fbfbfb;
+    padding: 18px 50px;
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.textContainer {
+    padding-top: 48px;
+}
+
+.imageWrapper {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.violet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    background: #4535af;
+    transform: rotate(-15deg);
+    top: 36%;
+    left: -34px;
+}

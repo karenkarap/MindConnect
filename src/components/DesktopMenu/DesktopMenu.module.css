@@ -1,0 +1,30 @@
+.navWrapper{
+    display: none;
+}
+
+.buttonWrapper {
+    display: none;
+}
+
+@media(min-width:900px){
+    .desktopNavList {
+            display: flex;
+            gap: 40px;
+        }
+    
+        .link {
+            padding: 38px 0;
+            display: inline-block;
+        }
+
+        .buttonWrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+        }
+        
+        .navWrapper {
+            display: block;
+        }
+}
+

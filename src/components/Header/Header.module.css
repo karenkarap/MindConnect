@@ -1,0 +1,64 @@
+.desktopMenu {
+    display: none;
+}
+
+
+.home {
+    background: linear-gradient(
+        to right,
+        #fbfbfb,
+        rgba(84, 190, 150, 0.05));   
+}
+
+.default {
+    background-color: #fbfbfb;
+}
+
+.accentColor {
+    color:var(--color-main-theme);
+}
+
+.logo {
+    font-weight: var(--font-weight-medium);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.openBtn {
+    background: none;
+    border: none;
+    padding: 15px 12px;
+    line-height: 0;
+}
+
+.openBtn svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+
+@media(min-width:900px) {
+
+
+    .openBtn {
+        display: none;
+    }
+
+    .desktopMenu{
+        display: block;
+    }
+
+   
+
+    .header {
+        border-bottom: 1px solid rgba(25, 26, 21, 0.1);
+    }
+}

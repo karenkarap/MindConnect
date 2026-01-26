@@ -1,5 +1,23 @@
+:root {
+  --font-primary: 'Inter', sans-serif;
+
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --color-main-text: #191a15;
+  --color-main-theme: #54be96;
+  --color-main-light-theme: rgba(84, 190, 150, 0.2);
+
+  --transition : 300ms ease-in-out;
+
+}
+
 body {
   margin: 0;
+  font-family: var(--font-primary);
+  color: var(--color-main-text);
 }
 
 a {
@@ -17,6 +35,8 @@ ol {
 
 button {
   cursor: pointer;
+  background-color: transparent;
+  border-color: transparent
 }
 
 h1,

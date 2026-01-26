@@ -1,0 +1,27 @@
+.button {
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.color-transparent{
+    background-color: transparent;
+    color:var(--color-main-text);
+    border: 1px solid rgba(25, 26, 21, 0.2);
+}
+
+.color-main {
+    background-color: var(--color-main-theme);
+    color: #fbfbfb;
+}
+
+.size-s {
+    padding: 14px 39px;
+}
+.size-m {
+    padding: 16px 39px;
+}
+.size-l {
+    padding: 18px 50px;
+}
