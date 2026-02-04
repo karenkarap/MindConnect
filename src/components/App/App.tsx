@@ -5,8 +5,16 @@ import Home from '../../pages/Home/Home';
 import Psychologists from '../../pages/Psychologists/Psychologists';
 import Favorites from '../../pages/Favorites/Favorites';
 import SvgSprite from '../ui/icons/SpriteIcons';
+import { useState } from 'react';
+import Modal from '../Modal/Modal';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <>
       <SvgSprite />
@@ -17,6 +25,7 @@ function App() {
           <Route path="/psychologists" element={<Psychologists />} />
           <Route path="/favorites" element={<Favorites />} />
         </Routes>
+        {isModalOpen && <Modal variant="LogIn" onClose={handleModal} />}
       </main>
     </>
   );

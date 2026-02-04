@@ -1,0 +1,101 @@
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100dvh;
+    width: 100vw;
+    background: rgba(25, 26, 21, 0.6);
+}
+
+.modal{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    width: 100%;
+    max-width: 566px;
+    border-radius: 30px;
+    padding: 64px;
+
+    background: #fbfbfb;
+}
+
+.closeBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.textWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title{
+    font-weight: var(--font-weight-medium);
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.text{
+    width: 435px;
+    line-height: 1.25;
+    color: rgba(25, 26, 21, 0.5);
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input {
+    padding: 18px 16px;
+    border: 2px solid rgba(25, 26, 21, 0.1);
+    border-radius: 12px;
+    outline: transparent;
+    &:focus {
+        border-color:var(--color-main-theme);
+    }
+}
+
+
+.passWrapper{
+    position: relative;
+}
+
+.inputPassword{
+    width: 100%;
+}
+
+
+.btnEye{
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0;
+}
+
+.button{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+
+    padding: 16px;
+    border-radius: 30px;
+    margin-top: 22px;
+    background-color: var(--color-main-theme);
+}

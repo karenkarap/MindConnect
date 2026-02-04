@@ -1,13 +1,14 @@
 .heroSection {
-    padding: 78px 0 100px;
+    padding: 40px 0 40px;
     background: linear-gradient(to right bottom,
-                #fbfbfb,
-                rgba(84, 190, 150, 0.1));
+            #fbfbfb,
+            rgba(84, 190, 150, 0.1));
 }
 
 .wrapper {
     display: flex;
-    gap: 125px;
+    flex-direction: column;
+    gap: 4rem;
 }
 
 .title {
@@ -24,6 +25,8 @@
 }
 
 .text {
+    width: 100%;
+    max-width: 507px;
     font-weight: var(--font-weight-medium);
     font-size: 18px;
     line-height: 1.33;
@@ -39,14 +42,16 @@
     gap: 18px;
     background-color: var(--color-main-theme);
     color: #fbfbfb;
-    padding: 18px 50px;
+    padding: 18px 48px;
     font-weight: var(--font-weight-medium);
     font-size: 20px;
     line-height: 1.2;
     letter-spacing: -0.01em;
 }
 
+
 .textContainer {
+    width: 100%;
     padding-top: 48px;
 }
 
@@ -70,5 +75,90 @@
     background: #4535af;
     transform: rotate(-15deg);
     top: 36%;
-    left: -34px;
+    left: -3%;
+}
+
+.violet svg {
+    transform: rotate(15deg);
+}
+
+.yellow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    background: #fbc75e;
+    transform: rotate(15deg);
+    top: 9%;
+    right: -3%;
+}
+
+.yellow svg {
+    transform: rotate(-15deg);
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+
+    position: absolute;
+    bottom: 8%;
+    left: -3%;
+
+    background-color: var(--color-main-theme);
+    border-radius: 20px;
+}
+
+.infoContainerWhite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    width: 54px;
+    height: 54px;
+    background-color: #fbfbfb;
+}
+
+.infoContainerText {
+    font-size: 14px;
+    color: rgba(251, 251, 251, 0.5);
+}
+
+.infoContainerCount {
+    font-weight: var(--font-weight-bold);
+    font-size: 1.5rem;
+    color: #fbfbfb;
+}
+
+@media (min-width:1440px) {
+    .heroSection {
+            padding: 78px 0 100px;
+        }
+
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 125px;
+    }
+
+    .violet {
+        left: -8%;
+    }
+
+    .yellow {
+        right: -8%;
+    }
+
+    .infoContainer{
+        bottom: 14%;
+        left: -24%;
+    }
+               
 }

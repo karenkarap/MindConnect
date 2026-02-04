@@ -17,7 +17,7 @@ const Home = () => {
               life with the help of our experienced psychologists.
             </p>
             <button type="button" className={css.button}>
-              Get started <SvgIcon size={16} name={'arrow'} />
+              Get started <SvgIcon width={15} height={16} name={'arrow'} />
             </button>
           </div>
           <div className={css.imageContainer}>
@@ -25,7 +25,20 @@ const Home = () => {
               <img src={heroImage} alt="Hero" loading="lazy" />
             </div>
             <div className={css.violet}>
-              <SvgIcon name={'question'} size={17} />
+              <SvgIcon name={'question'} width={10} height={17} />
+            </div>
+            <div className={css.yellow}>
+              <SvgIcon name="person" width={17} height={15} />
+            </div>
+
+            <div className={css.infoContainer}>
+              <div className={css.infoContainerWhite}>
+                <SvgIcon name="check" width={20} height={15} />
+              </div>
+              <div>
+                <p className={css.infoContainerText}>Experienced psychologists</p>
+                <p className={css.infoContainerCount}>15,000</p>
+              </div>
             </div>
           </div>
         </div>

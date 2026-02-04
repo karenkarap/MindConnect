@@ -1,13 +1,14 @@
 interface SvgIconProps {
   name: string;
-  size?: number | string;
+  width?: number | string;
+  height?: number | string;
   className?: string;
   style?: React.CSSProperties;
 }
 
-const SvgIcon = ({ name, size = '24', className, style }: SvgIconProps) => {
+const SvgIcon = ({ name, width = '24', height = '24', className, style }: SvgIconProps) => {
   return (
-    <svg width={size} height={size} className={className} style={style} fill="currentColor">
+    <svg width={width} height={height} className={className} style={style} fill="currentColor">
       <use href={`#${name}`} />
     </svg>
   );
