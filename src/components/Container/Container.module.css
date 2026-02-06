@@ -2,6 +2,7 @@
 .container {
     max-width: 1440px;
     width: 100%;
+    margin: 0 auto;
     padding-inline: clamp(16px,
                 calc(16px + (128 - 16) * ((100vw - 400px) / (1440 - 400))),
                 128px);

@@ -1,12 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import css from './DesktopMenu.module.css';
 import Button from '../Button/Button';
+import type { User } from 'firebase/auth';
 
 interface DesktopMenuProps {
-  isAuth: boolean;
+  user: User | null;
+  onLogin: () => void;
+  onRegister: () => void;
 }
 
-const DesktopMenu = ({ isAuth }: DesktopMenuProps) => {
+const DesktopMenu = ({ user, onLogin, onRegister }: DesktopMenuProps) => {
   return (
     <>
       <nav className={css.navWrapper}>
@@ -27,7 +30,7 @@ const DesktopMenu = ({ isAuth }: DesktopMenuProps) => {
               Psychologists
             </NavLink>
           </li>
-          {isAuth && (
+          {user && (
             <li>
               <NavLink
                 to={'favorites'}
@@ -41,15 +44,15 @@ const DesktopMenu = ({ isAuth }: DesktopMenuProps) => {
       </nav>
 
       <div className={css.buttonWrapper}>
-        {isAuth ? (
+        {user ? (
           <>
-            <p>Username</p>
+            <p>{user.displayName}</p>
             <Button text="Log out" color="transparent" />
           </>
         ) : (
           <>
-            <Button text="Log in" color="transparent" />
-            <Button text="Registration" color="main" />
+            <Button text="Log in" color="transparent" onClick={onLogin} />
+            <Button text="Registration" color="main" onClick={onRegister} />
           </>
         )}
       </div>

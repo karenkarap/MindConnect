@@ -3,7 +3,11 @@ import css from './Home.module.css';
 import SvgIcon from '../../components/ui/icons/SvgIcon';
 import heroImage from '../../assets/images/hero/image 1.webp';
 
-const Home = () => {
+interface HomeProps {
+  onOpen: () => void;
+}
+
+const Home = ({ onOpen }: HomeProps) => {
   return (
     <section className={css.heroSection}>
       <Container>
@@ -16,7 +20,7 @@ const Home = () => {
               We help you to reveal your potential, overcome challenges and find a guide in your own
               life with the help of our experienced psychologists.
             </p>
-            <button type="button" className={css.button}>
+            <button type="button" className={css.button} onClick={onOpen}>
               Get started <SvgIcon width={15} height={16} name={'arrow'} />
             </button>
           </div>

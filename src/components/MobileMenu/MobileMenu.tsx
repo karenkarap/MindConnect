@@ -3,14 +3,17 @@ import css from './MobileMenu.module.css';
 import { IoClose } from 'react-icons/io5';
 import Button from '../Button/Button';
 import { useEffect } from 'react';
+import type { User } from 'firebase/auth';
 
 interface MobileMenuProps {
   onClose: () => void;
   isOpen: boolean;
-  isAuth: boolean;
+  user: User | null;
+  onLogin: () => void;
+  onRegister: () => void;
 }
 
-const MobileMenu = ({ onClose, isOpen, isAuth }: MobileMenuProps) => {
+const MobileMenu = ({ onClose, isOpen, user, onLogin, onRegister }: MobileMenuProps) => {
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -49,7 +52,7 @@ const MobileMenu = ({ onClose, isOpen, isAuth }: MobileMenuProps) => {
                 Psychologists
               </NavLink>
             </li>
-            {isAuth && (
+            {user && (
               <li onClick={onClose}>
                 <NavLink
                   to={'favorites'}
@@ -62,15 +65,15 @@ const MobileMenu = ({ onClose, isOpen, isAuth }: MobileMenuProps) => {
           </ul>
         </nav>
         <div className={css.buttonsWrapper}>
-          {isAuth ? (
+          {user ? (
             <>
-              <p>Username</p>
+              <p>{user.displayName}</p>
               <Button text="Log out" color="transparent" />
             </>
           ) : (
             <>
-              <Button text="Log in" color="transparent" />
-              <Button text="Registration" color="main" />
+              <Button text="Log in" color="transparent" onClick={onLogin} />
+              <Button text="Registration" color="main" onClick={onRegister} />
             </>
           )}
         </div>

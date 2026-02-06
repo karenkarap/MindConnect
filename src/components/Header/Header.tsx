@@ -1,16 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
 import Container from '../Container/Container';
 import css from './Header.module.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import DesktopMenu from '../DesktopMenu/DesktopMenu';
 import { IoMenu } from 'react-icons/io5';
+import type { User } from 'firebase/auth';
 
-const Header = () => {
+interface HeaderProps {
+  onLogin: () => void;
+  onRegister: () => void;
+  user: User | null;
+}
+
+const Header = ({ onLogin, onRegister, user }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const isHome = pathname === '/';
-  const isAuth = false;
 
   return (
     <header className={`${css.header} ${isHome ? css.home : css.default}`}>
@@ -31,9 +37,11 @@ const Header = () => {
           <MobileMenu
             onClose={() => setIsMenuOpen((prev) => !prev)}
             isOpen={isMenuOpen}
-            isAuth={isAuth}
+            user={user}
+            onLogin={onLogin}
+            onRegister={onRegister}
           />
-          <DesktopMenu isAuth={isAuth} />
+          <DesktopMenu user={user} onLogin={onLogin} onRegister={onRegister} />
         </div>
       </Container>
     </header>

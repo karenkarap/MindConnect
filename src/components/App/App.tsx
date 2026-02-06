@@ -1,31 +1,70 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header';
-import css from './App.module.css';
 import Home from '../../pages/Home/Home';
 import Psychologists from '../../pages/Psychologists/Psychologists';
 import Favorites from '../../pages/Favorites/Favorites';
 import SvgSprite from '../ui/icons/SpriteIcons';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
+import type { ModalType } from '../../types/modalType';
+import type { LoginData, RegisterData } from '../../types/authTypes';
+import { registerUser } from '../../services/authApi';
+import { useAuthStore } from '../../store/authStore';
+import type { User } from 'firebase/auth';
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [modalType, setModalType] = useState<ModalType>(null);
 
-  const handleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const loading: boolean = useAuthStore((state) => state.loading);
+  const user: User | null = useAuthStore((state) => state.user);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  const openModalRegister = () => {
+    setModalType('register');
+  };
+
+  const openModalLogin = () => {
+    setModalType('login');
+  };
+
+  const closeModal = () => {
+    setModalType(null);
+  };
+
+  const handleRegisterForm = async (data: RegisterData) => {
+    try {
+      const user = await registerUser(data);
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLoginForm = (data: LoginData) => {
+    console.log('LoginData: ', data);
   };
 
   return (
     <>
       <SvgSprite />
-      <Header />
+      <Header onLogin={openModalLogin} onRegister={openModalRegister} user={user} />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home onOpen={openModalLogin} />} />
           <Route path="/psychologists" element={<Psychologists />} />
-          <Route path="/favorites" element={<Favorites />} />
+          {user && <Route path="/favorites" element={user ? <Favorites /> : <Navigate to="/" />} />}
         </Routes>
-        {isModalOpen && <Modal variant="LogIn" onClose={handleModal} />}
+        {modalType && (
+          <Modal
+            variant={modalType}
+            onClose={closeModal}
+            onSubmitLogin={handleLoginForm}
+            onSubmitRegister={handleRegisterForm}
+          />
+        )}
       </main>
     </>
   );
