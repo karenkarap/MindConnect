@@ -4,14 +4,16 @@ import './index.css';
 import 'modern-normalize';
 import App from './components/App/App.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import { initAuthListener } from './services/authListener.ts';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-initAuthListener();
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>
 );

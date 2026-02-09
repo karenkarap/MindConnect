@@ -4,6 +4,7 @@ import { IoClose } from 'react-icons/io5';
 import Button from '../Button/Button';
 import { useEffect } from 'react';
 import type { User } from 'firebase/auth';
+import { logOutUser } from '../../services/authApi';
 
 interface MobileMenuProps {
   onClose: () => void;
@@ -68,7 +69,7 @@ const MobileMenu = ({ onClose, isOpen, user, onLogin, onRegister }: MobileMenuPr
           {user ? (
             <>
               <p>{user.displayName}</p>
-              <Button text="Log out" color="transparent" />
+              <Button text="Log out" color="transparent" onClick={() => logOutUser()} />
             </>
           ) : (
             <>

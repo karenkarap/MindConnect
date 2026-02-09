@@ -43,6 +43,10 @@
     border-radius: 30px;
     margin-top: 22px;
     background-color: var(--color-main-theme);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .inputWrapper {
@@ -62,4 +66,10 @@
     position: absolute;
     line-height: 1.25;
     color: #e53935;
+}
+
+.loader {
+    height: 30px;
+    width: 30px;
+    align-items: center;
 }

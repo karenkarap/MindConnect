@@ -5,18 +5,19 @@ import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import DesktopMenu from '../DesktopMenu/DesktopMenu';
 import { IoMenu } from 'react-icons/io5';
-import type { User } from 'firebase/auth';
+import { useAuthStore } from '../../store/authStore';
 
 interface HeaderProps {
   onLogin: () => void;
   onRegister: () => void;
-  user: User | null;
 }
 
-const Header = ({ onLogin, onRegister, user }: HeaderProps) => {
+const Header = ({ onLogin, onRegister }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const isHome = pathname === '/';
+
+  const user = useAuthStore((state) => state.user);
 
   return (
     <header className={`${css.header} ${isHome ? css.home : css.default}`}>

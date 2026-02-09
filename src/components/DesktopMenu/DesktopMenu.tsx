@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import css from './DesktopMenu.module.css';
 import Button from '../Button/Button';
 import type { User } from 'firebase/auth';
+import { logOutUser } from '../../services/authApi';
 
 interface DesktopMenuProps {
   user: User | null;
@@ -47,7 +48,7 @@ const DesktopMenu = ({ user, onLogin, onRegister }: DesktopMenuProps) => {
         {user ? (
           <>
             <p>{user.displayName}</p>
-            <Button text="Log out" color="transparent" />
+            <Button text="Log out" color="transparent" onClick={() => logOutUser()} />
           </>
         ) : (
           <>

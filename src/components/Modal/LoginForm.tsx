@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginSchema } from '../../validations/schemaRegistration';
 import { useForm } from 'react-hook-form';
 import SvgIcon from '../ui/icons/SvgIcon';
+import { RotatingLines } from 'react-loader-spinner';
 
 interface LoginFormProps {
   onSubmit: (data: LoginData) => void;
@@ -51,7 +52,19 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
       </div>
 
       <button type="submit" className={css.button} disabled={!isValid || isSubmitting}>
-        Log In
+        {isSubmitting ? (
+          <RotatingLines
+            visible={true}
+            color="#fbfbfb"
+            strokeWidth="5"
+            animationDuration="1"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            wrapperClass={css.loader}
+          />
+        ) : (
+          'Log In'
+        )}
       </button>
     </form>
   );

@@ -1,22 +1,28 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header';
 import Home from '../../pages/Home/Home';
 import Psychologists from '../../pages/Psychologists/Psychologists';
 import Favorites from '../../pages/Favorites/Favorites';
 import SvgSprite from '../ui/icons/SpriteIcons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import type { ModalType } from '../../types/modalType';
 import type { LoginData, RegisterData } from '../../types/authTypes';
-import { registerUser } from '../../services/authApi';
+import { logInUser, registerUser } from '../../services/authApi';
 import { useAuthStore } from '../../store/authStore';
-import type { User } from 'firebase/auth';
+import { initAuthListener } from '../../services/authListener';
 
 function App() {
   const [modalType, setModalType] = useState<ModalType>(null);
 
-  const loading: boolean = useAuthStore((state) => state.loading);
-  const user: User | null = useAuthStore((state) => state.user);
+  const loading = useAuthStore((state) => state.loading);
+  const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    const unsubscribe = initAuthListener();
+
+    return () => unsubscribe();
+  }, []);
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -37,25 +43,32 @@ function App() {
   const handleRegisterForm = async (data: RegisterData) => {
     try {
       const user = await registerUser(data);
+      closeModal();
       console.log(user);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleLoginForm = (data: LoginData) => {
-    console.log('LoginData: ', data);
+  const handleLoginForm = async (data: LoginData) => {
+    try {
+      const user = await logInUser(data);
+      closeModal();
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <SvgSprite />
-      <Header onLogin={openModalLogin} onRegister={openModalRegister} user={user} />
+      <Header onLogin={openModalLogin} onRegister={openModalRegister} />
       <main>
         <Routes>
           <Route path="/" element={<Home onOpen={openModalLogin} />} />
           <Route path="/psychologists" element={<Psychologists />} />
-          {user && <Route path="/favorites" element={user ? <Favorites /> : <Navigate to="/" />} />}
+          {user && <Route path="/favorites" element={<Favorites />} />}
         </Routes>
         {modalType && (
           <Modal

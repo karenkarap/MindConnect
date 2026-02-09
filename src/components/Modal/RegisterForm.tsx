@@ -5,6 +5,7 @@ import { RegistrationSchema } from '../../validations/schemaRegistration';
 import css from './RegisterForm.module.css';
 import { useState } from 'react';
 import SvgIcon from '../ui/icons/SvgIcon';
+import { RotatingLines } from 'react-loader-spinner';
 
 interface RegisterFormProps {
   onSubmit: (user: RegisterData) => void;
@@ -62,7 +63,19 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
       </div>
 
       <button type="submit" className={css.button} disabled={!isValid || isSubmitting}>
-        Sign Up
+        {isSubmitting ? (
+          <RotatingLines
+            visible={true}
+            color="#fbfbfb"
+            strokeWidth="5"
+            animationDuration="1"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            wrapperClass={css.loader}
+          />
+        ) : (
+          'Sign Up'
+        )}
       </button>
     </form>
   );
