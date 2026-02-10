@@ -4,7 +4,8 @@ interface Review {
   reviewer: string;
 }
 
-export interface HttpResponsePsychologist {
+export interface Psychologist {
+  id: string;
   about: string;
   avatar_url: string;
   experience: number;
@@ -17,12 +18,8 @@ export interface HttpResponsePsychologist {
   specialization: string;
 }
 
-export interface Psychologist extends HttpResponsePsychologist {
-  id: string;
-}
-
 export interface ApiResponse {
-  items: HttpResponsePsychologist[];
+  items: Psychologist[];
   nextCursor: string | null;
 }
 

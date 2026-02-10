@@ -1,0 +1,64 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
+
+.listItem {
+
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+    border-radius: 24px;
+    background: #fbfbfb;
+}
+
+.imageWrapper {
+    height: 120px;
+    width: 120px;
+    border: 2px solid rgba(84, 190, 150, 0.2);
+    border-radius: 30px;
+    padding: 12px;
+}
+
+.image {
+    border-radius: 15px;
+
+
+    background-color: grey;
+}
+
+.headerCard{ 
+    display: flex;
+    flex-direction: row;
+}
+
+.ratingAndPrice {
+    margin-left: auto ;
+}
+
+.textNameWrapper {}
+
+.text {
+    font-weight: 500;
+    line-height: 1.5;
+    color: #8a8a89;
+}
+
+.name{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    color: #191a15;
+}
+
+.rating {
+
+}
+.priceText {}
+
+.price {}
+
+.likeBtn {}
