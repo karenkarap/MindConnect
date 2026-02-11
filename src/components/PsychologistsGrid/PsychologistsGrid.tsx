@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Psychologist } from '../../types/psychologistsTypes';
 import SvgIcon from '../ui/icons/SvgIcon';
 import css from './PsychologistsGrid.module.css';
@@ -7,40 +8,91 @@ interface PsychologistsGridProps {
 }
 
 const PsychologistsGrid = ({ psychologists }: PsychologistsGridProps) => {
-  console.log(psychologists);
+  const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <ul className={css.list}>
-      {psychologists.map((item) => (
-        <li key={item.id} className={css.listItem}>
+      {psychologists.map((psychologist) => (
+        <li key={psychologist.id} className={css.listItem}>
           <div className={css.imageWrapper}>
-            <img src="#" alt={item.name} className={css.image} />
+            <img src="#" alt={psychologist.name} className={css.image} />
           </div>
 
           <div className={css.contentWrapper}>
             <div className={css.headerCard}>
               <div className={css.textNameWrapper}>
                 <p className={css.text}>Psychologist</p>
-                <h2 className={css.name}>{item.name}</h2>
+                <h2 className={css.name}>{psychologist.name}</h2>
               </div>
 
               <div className={css.ratingAndPrice}>
-                <div>
+                <div className={css.ratingWrapper}>
                   <SvgIcon name="star" width={15} height={14} />
-                  <p className={css.rating}>Rating: {item.rating}</p>
+                  <p className={css.rating}>Rating: {psychologist.rating}</p>
                 </div>
 
-                <div>
-                  <p className={css.priceText}>
-                    Price / 1 hour: <span className={css.price}>{item.price_per_hour}$</span>
-                  </p>
-                </div>
+                <p className={css.priceText}>
+                  Price / 1 hour: <span className={css.price}>{psychologist.price_per_hour}$</span>
+                </p>
+
+                <button type="button" className={css.likeBtn}>
+                  <SvgIcon name="like" width={26} height={26} />
+                </button>
               </div>
-
-              <button type="button" className={css.likeBtn}>
-                <SvgIcon name="like" width={26} height={26} />
-              </button>
             </div>
+
+            <ul className={css.advantagesList}>
+              <li className={css.advantagesItem}>
+                <span className={css.softerColor}>Experience:</span> {psychologist.experience}
+              </li>
+              <li className={css.advantagesItem}>
+                <span className={css.softerColor}>License:</span>
+                {psychologist.license}
+              </li>
+              <li className={css.advantagesItem}>
+                <span className={css.softerColor}>Specialization:</span>
+                {psychologist.specialization}
+              </li>
+              <li className={css.advantagesItem}>
+                <span className={css.softerColor}>Initial consultation: </span>
+                {psychologist.initial_consultation}
+              </li>
+            </ul>
+
+            <p className={css.description}>{psychologist.about}</p>
+            {openId !== psychologist.id && (
+              <button
+                type="button"
+                className={css.readMoreBtn}
+                onClick={() => setOpenId(openId === psychologist.id ? null : psychologist.id)}
+              >
+                Read more
+              </button>
+            )}
+
+            {openId === psychologist.id && (
+              <>
+                <ul className={css.reviewList}>
+                  {psychologist.reviews.map((review) => (
+                    <li className={css.reviewWrapper}>
+                      <div className={css.reviewRatingWrapper}>
+                        <div className={css.reviewLogo}>{review.comment.slice(0, 1)}</div>
+                        <div>
+                          <p>{review.reviewer}</p>
+                          <SvgIcon name="star" width={15} height={14} />
+                          {review.rating}
+                        </div>
+                      </div>
+
+                      <p className={css.reviewComment}>{review.comment}</p>
+                    </li>
+                  ))}
+                </ul>
+                <button type="button" className={css.appointmentBtn}>
+                  Make an appointment
+                </button>
+              </>
+            )}
           </div>
         </li>
       ))}

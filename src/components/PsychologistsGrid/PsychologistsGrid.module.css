@@ -33,13 +33,33 @@
 .headerCard{ 
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.contentWrapper {
+    width: 100%;
 }
 
 .ratingAndPrice {
     margin-left: auto ;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.textNameWrapper {}
+.ratingWrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    border-right: 1px solid rgba(25, 26, 21, 0.2);
+    padding-right: 1rem;
+}
+
+.textNameWrapper {
+    display: flex;
+    flex-direction: column;
+}
 
 .text {
     font-weight: 500;
@@ -54,11 +74,98 @@
     color: #191a15;
 }
 
-.rating {
-
+.priceText {
+    padding-left: 1rem;
+    padding-right: 28px;
 }
-.priceText {}
 
-.price {}
+.price {
+    color: #38cd3e;
+}
 
-.likeBtn {}
+.likeBtn {
+    line-height: 0;
+}
+
+.advantagesList{
+    max-width: 85%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 4px;
+
+    margin-bottom: 1.5rem;
+}
+
+.advantagesItem {
+    border-radius: 24px;
+    padding: 8px 16px;
+    background: #f3f3f3;
+    flex-basis: content;
+}
+
+.softerColor {
+    color: rgba(25, 26, 21, 0.5);
+}
+
+.description {
+    line-height: 1.25;
+    color: rgba(25, 26, 21, 0.5);
+}
+
+.readMoreBtn {
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0;
+}
+
+.reviewList{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-top: 48px;
+    padding-bottom: 40px;
+}
+
+.reviewWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.reviewLogo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 44px;
+    width: 44px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    background: rgba(84, 190, 150, 0.2);
+    color: #54be96;
+}
+
+.reviewRatingWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.appointmentBtn {
+    padding: 12px 32px;
+    border-radius: 30px;
+
+    background: #54be96;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+}
