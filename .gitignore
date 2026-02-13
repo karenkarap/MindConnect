@@ -10,6 +10,10 @@ lerna-debug.log*
 # Env vars
 .env
 
+#geminiCli
+GEMINI.md
+.geminiignore
+
 node_modules
 dist
 dist-ssr
