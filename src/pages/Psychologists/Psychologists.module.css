@@ -3,3 +3,18 @@
     padding-bottom: 100px;
     background: #f3f3f3;
 }
+
+.loadMoreBtn {
+    display: block;
+    margin: 0 auto;
+
+    border-radius: 30px;
+    padding: 14px 48px;
+    background: #54be96;
+    
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+}

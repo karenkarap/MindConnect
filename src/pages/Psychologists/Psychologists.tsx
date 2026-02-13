@@ -25,7 +25,9 @@ const Psychologists = () => {
       <Container>
         {isLoading && <h2>Loading ...</h2>}
         {allPsychologists && <PsychologistsGrid psychologists={allPsychologists} />}
-        <button onClick={() => fetchNextPage()}>Load more</button>
+        <button onClick={() => fetchNextPage()} className={css.loadMoreBtn}>
+          Load more
+        </button>
       </Container>
     </section>
   );

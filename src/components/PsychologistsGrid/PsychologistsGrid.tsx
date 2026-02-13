@@ -15,7 +15,7 @@ const PsychologistsGrid = ({ psychologists }: PsychologistsGridProps) => {
       {psychologists.map((psychologist) => (
         <li key={psychologist.id} className={css.listItem}>
           <div className={css.imageWrapper}>
-            <img src="#" alt={psychologist.name} className={css.image} />
+            <img src={psychologist.avatar_url} alt={psychologist.name} className={css.image} />
           </div>
 
           <div className={css.contentWrapper}>
@@ -77,10 +77,12 @@ const PsychologistsGrid = ({ psychologists }: PsychologistsGridProps) => {
                     <li className={css.reviewWrapper}>
                       <div className={css.reviewRatingWrapper}>
                         <div className={css.reviewLogo}>{review.comment.slice(0, 1)}</div>
-                        <div>
+                        <div className={css.reviewLogoRatingWrapper}>
                           <p>{review.reviewer}</p>
-                          <SvgIcon name="star" width={15} height={14} />
-                          {review.rating}
+                          <div className={css.reviewLogoRating}>
+                            <SvgIcon name="star" width={15} height={14} />
+                            {review.rating}
+                          </div>
                         </div>
                       </div>
 
