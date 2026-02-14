@@ -11,8 +11,10 @@ lerna-debug.log*
 .env
 
 #geminiCli
-GEMINI.md
-.geminiignore
+# GEMINI.md
+# .geminiignore
+
+todo.md
 
 node_modules
 dist

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import css from './MobileMenu.module.css';
 import { IoClose } from 'react-icons/io5';
-import Button from '../Button/Button';
+import Button from '../ui/Button/Button';
 import { useEffect } from 'react';
 import type { User } from 'firebase/auth';
 import { logOutUser } from '../../services/authApi';

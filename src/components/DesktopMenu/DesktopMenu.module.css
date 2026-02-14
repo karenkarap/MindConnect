@@ -5,6 +5,27 @@
 .buttonWrapper {
     display: none;
 }
+.profileWrapper {
+    display: none;
+}
+
+.profileCredWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    align-items: center;
+}
+
+.profileIconWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    height: 40px;
+    width: 40px;
+    background: var(--color-main-theme);
+}
 
 @media(min-width:900px){
     .desktopNavList {
@@ -19,8 +40,16 @@
 
         .buttonWrapper {
             display: flex;
+            align-items: center;
             flex-direction: row;
             gap: 0.5rem;
+        }
+
+        .profileWrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: 28px;
         }
         
         .navWrapper {

@@ -1,97 +1,86 @@
-import {
-  ref,
-  query,
-  orderByKey,
-  limitToFirst,
-  startAfter,
-  orderByChild,
-  endAt,
-  startAt,
-  get,
-} from 'firebase/database';
 import { db } from '../config/firebase';
 import type { ApiResponse, FilterSort, Psychologist } from '../types/psychologistsTypes';
+import {
+  collection,
+  DocumentSnapshot,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+  startAfter,
+} from 'firebase/firestore';
 
-interface GetPsychologists {
-  pageParam: string | null;
+export interface GetPsychologists {
+  pageParam: DocumentSnapshot | null;
   filterSort?: FilterSort;
   limit?: number;
 }
 
 export const getPsychologists = async ({
-  pageParam: lastKey,
+  pageParam: lastDoc,
   filterSort = 'All',
-  limit = 3,
+  limit: pageLimit = 3,
 }: GetPsychologists): Promise<ApiResponse> => {
-  const dbRef = ref(db, 'psychologists');
+  const psychologistsRef = collection(db, 'psychologists');
 
-  let queryDb;
+  let q;
 
   switch (filterSort) {
     case 'A-Z':
+      q = query(psychologistsRef, orderBy('name', 'asc'));
+      break;
+
     case 'Z-A':
-      queryDb = query(dbRef, orderByChild('name'));
+      q = query(psychologistsRef, orderBy('name', 'desc'));
       break;
 
     case 'Popular':
+      q = query(psychologistsRef, orderBy('rating', 'desc'));
+      break;
+
     case 'NotPopular':
-      queryDb = query(dbRef, orderByChild('rating'));
+      q = query(psychologistsRef, orderBy('rating', 'asc'));
       break;
 
     case '>170$':
-      queryDb = query(dbRef, orderByChild('price_per_hour'), startAt(170));
+      q = query(
+        psychologistsRef,
+        where('price_per_hour', '>', 170),
+        orderBy('price_per_hour', 'asc')
+      );
       break;
+
     case '<170$':
-      queryDb = query(dbRef, orderByChild('price_per_hour'), endAt(170));
+      q = query(
+        psychologistsRef,
+        where('price_per_hour', '<', 170),
+        orderBy('price_per_hour', 'asc')
+      );
       break;
 
     default:
-      queryDb = query(dbRef, orderByKey());
-      break;
+      q = query(psychologistsRef, orderBy('name', 'asc'));
   }
 
-  if (lastKey) {
-    queryDb = query(queryDb, limitToFirst(limit + 1), startAfter(lastKey));
+  if (lastDoc) {
+    q = query(q, startAfter(lastDoc), limit(pageLimit + 1));
   } else {
-    queryDb = query(queryDb, limitToFirst(limit + 1));
+    q = query(q, limit(pageLimit + 1));
   }
 
-  const snapshot = await get(queryDb);
+  const snapshot = await getDocs(q);
 
-  if (!snapshot.exists()) {
-    return { items: [], nextCursor: null };
-  }
-
-  const data = snapshot.val() as Record<string, Omit<Psychologist, 'id'>>;
-
-  let items = Object.entries(data).map(([id, item]) => ({
-    id,
-    ...item,
+  const items = snapshot.docs.splice(0, pageLimit).map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Omit<Psychologist, 'id'>),
   }));
 
-  if (filterSort === 'NotPopular' || filterSort === 'Z-A') {
-    items = items.reverse();
-  }
-
-  const hasMore = items.length > limit;
-  items = items.slice(0, limit);
-  const nextCursor = hasMore ? items[items.length - 1].id : null;
+  const hasMore = snapshot.docs.length > pageLimit;
+  const nextCursor = hasMore ? snapshot.docs[pageLimit - 1] : null;
 
   return {
     items,
     nextCursor,
   };
 };
-
-// export const getAllPsychologists = async (): Promise<Psychologist[]> => {
-//   const snapshot = await get(ref(db, 'psychologists'));
-
-//   if (!snapshot.exists()) return [];
-
-//   const data = snapshot.val() as Record<string, HttpResponsePsychologist>;
-
-//   return Object.entries(data).map(([id, item]) => ({
-//     id,
-//     ...item,
-//   }));
-// };

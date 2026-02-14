@@ -1,3 +1,5 @@
+import type { DocumentSnapshot } from 'firebase/firestore';
+
 interface Review {
   comment: string;
   rating: number;
@@ -20,7 +22,7 @@ export interface Psychologist {
 
 export interface ApiResponse {
   items: Psychologist[];
-  nextCursor: string | null;
+  nextCursor: DocumentSnapshot | null;
 }
 
 export type FilterSort = 'A-Z' | 'Z-A' | '<170$' | '>170$' | 'Popular' | 'NotPopular' | 'All';
