@@ -2,12 +2,26 @@ import Container from '../../components/Container/Container';
 import css from './Home.module.css';
 import SvgIcon from '../../components/ui/icons/SvgIcon';
 import heroImage from '../../assets/images/hero/image 1.webp';
+import { useAuthStore } from '../../store/authStore';
+import { useNavigate } from 'react-router-dom';
 
 interface HomeProps {
   onOpen: () => void;
 }
 
 const Home = ({ onOpen }: HomeProps) => {
+  const user = useAuthStore((state) => state.user);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (!user) {
+      onOpen();
+    } else {
+      navigate('psychologists');
+    }
+  };
+
   return (
     <section className={css.heroSection}>
       <Container>
@@ -20,7 +34,7 @@ const Home = ({ onOpen }: HomeProps) => {
               We help you to reveal your potential, overcome challenges and find a guide in your own
               life with the help of our experienced psychologists.
             </p>
-            <button type="button" className={css.button} onClick={onOpen}>
+            <button type="button" className={css.button} onClick={handleClick}>
               Get started <SvgIcon width={15} height={16} name={'arrow'} />
             </button>
           </div>
