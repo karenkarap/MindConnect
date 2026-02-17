@@ -11,7 +11,7 @@ import Dropdown from '../../components/ui/Dropdown/Dropdown';
 const Psychologists = () => {
   const [filterSort, setFilterSort] = useState<FilterSort>('All');
 
-  const { data, isLoading, fetchNextPage, error } = useInfiniteQuery({
+  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: ['psychologists', filterSort],
     queryFn: ({ pageParam }: { pageParam: DocumentSnapshot | null }) =>
       getPsychologists({ pageParam, filterSort }),
@@ -23,7 +23,6 @@ const Psychologists = () => {
     setFilterSort(value);
   };
 
-  console.log('Error :', error);
   const allPsychologists = data?.pages.flatMap((item) => item.items) ?? [];
 
   return (

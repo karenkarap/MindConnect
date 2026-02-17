@@ -27,6 +27,10 @@
     background: var(--color-main-theme);
 }
 
+.accentColor {
+    color: var(--color-main-theme);
+}
+
 @media(min-width:900px){
     .desktopNavList {
             display: flex;

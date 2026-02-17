@@ -1,0 +1,228 @@
+.listItem {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 24px;
+    background: #fbfbfb;
+    position: relative;
+}
+
+.imageWrapper {
+    height: 180px;
+    width: 180px;
+    border: 2px solid rgba(84, 190, 150, 0.2);
+    border-radius: 30px;
+    padding: 12px;
+    flex-shrink: 0;
+}
+
+.image {
+    border-radius: 15px;
+    background-color: grey;
+}
+
+.headerCard{ 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.contentWrapper {
+    width: 100%;
+}
+
+.ratingAndPrice {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ratingWrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    border-right: 1px solid rgba(25, 26, 21, 0.2);
+    padding-right: 1rem;
+}
+
+.textNameWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.text {
+    font-weight: 500;
+    line-height: 1.5;
+    color: #8a8a89;
+}
+
+.name{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    color: #191a15;
+}
+
+.priceText {
+    padding-left: 1rem;
+    padding-right: 28px;
+}
+
+.price {
+    color: #38cd3e;
+}
+
+.likeBtn {
+    line-height: 0;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border: none;
+}
+
+.likeBtn svg {
+    height: 32px;
+    width: 32px;
+}
+
+.advantagesList{
+    max-width: 85%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 4px;
+
+    margin-bottom: 1.5rem;
+}
+
+.advantagesItem {
+    border-radius: 24px;
+    padding: 8px 16px;
+    background: #f3f3f3;
+    flex-basis: content;
+}
+
+.softerColor {
+    color: rgba(25, 26, 21, 0.5);
+}
+
+.description {
+    line-height: 1.25;
+    color: rgba(25, 26, 21, 0.5);
+}
+
+.readMoreBtn {
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0;
+    margin-top: 14px;
+}
+
+.reviewList{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 48px;
+    margin-bottom: 40px;
+}
+
+.reviewWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.reviewLogo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 44px;
+    width: 44px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    background: rgba(84, 190, 150, 0.2);
+    color: #54be96;
+}
+
+.reviewLogoRatingWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.reviewLogoRating{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.reviewRatingWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.appointmentBtn {
+    padding: 12px 32px;
+    border-radius: 30px;
+
+    background: #54be96;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+}
+
+@media (min-width: 1440px) {
+    .listItem {
+        flex-direction: row;
+        position: static;
+    }
+
+   .imageWrapper {
+       height: 120px;
+       width: 120px;
+   }
+
+   .likeBtn {
+       line-height: 0;
+       position: static;
+       height: 26px;
+       width: 26px;
+       padding: 0;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+    
+   }
+
+   .likeBtn svg {
+        height: 26px;
+        width: 26px;
+   }
+
+   .headerCard {
+       flex-direction: row;
+       gap: 0;
+   }
+
+   .ratingAndPrice {
+       margin-left: auto;
+   }
+    
+}
