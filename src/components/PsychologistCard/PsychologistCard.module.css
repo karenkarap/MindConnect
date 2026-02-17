@@ -1,17 +1,16 @@
 .listItem {
-
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1.5rem;
-
     padding: 1.5rem;
     border-radius: 24px;
     background: #fbfbfb;
+    position: relative;
 }
 
 .imageWrapper {
-    height: 120px;
-    width: 120px;
+    height: 180px;
+    width: 180px;
     border: 2px solid rgba(84, 190, 150, 0.2);
     border-radius: 30px;
     padding: 12px;
@@ -25,9 +24,10 @@
 
 .headerCard{ 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     margin-bottom: 24px;
+    gap: 16px;
 }
 
 .contentWrapper {
@@ -35,7 +35,6 @@
 }
 
 .ratingAndPrice {
-    margin-left: auto ;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -44,6 +43,7 @@
 .ratingWrapper{
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 8px;
     border-right: 1px solid rgba(25, 26, 21, 0.2);
     padding-right: 1rem;
@@ -79,6 +79,15 @@
 
 .likeBtn {
     line-height: 0;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border: none;
+}
+
+.likeBtn svg {
+    height: 32px;
+    width: 32px;
 }
 
 .advantagesList{
@@ -156,7 +165,6 @@
     display: flex;
     flex-direction: row;
     gap: 8px;
-
     align-items: center;
 }
 
@@ -178,4 +186,43 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
     color: #fbfbfb;
+}
+
+@media (min-width: 1440px) {
+    .listItem {
+        flex-direction: row;
+        position: static;
+    }
+
+   .imageWrapper {
+       height: 120px;
+       width: 120px;
+   }
+
+   .likeBtn {
+       line-height: 0;
+       position: static;
+       height: 26px;
+       width: 26px;
+       padding: 0;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+    
+   }
+
+   .likeBtn svg {
+        height: 26px;
+        width: 26px;
+   }
+
+   .headerCard {
+       flex-direction: row;
+       gap: 0;
+   }
+
+   .ratingAndPrice {
+       margin-left: auto;
+   }
+    
 }
