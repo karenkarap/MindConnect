@@ -40,18 +40,18 @@ const PsychologistCard = ({ psychologist }: PsychologistCardProps) => {
         </div>
 
         <ul className={css.advantagesList}>
-          <li className={css.advantagesItem}>
+          <li className={css.advantagesItem} key={psychologist.experience}>
             <span className={css.softerColor}>Experience:</span> {psychologist.experience}
           </li>
-          <li className={css.advantagesItem}>
+          <li className={css.advantagesItem} key={psychologist.license}>
             <span className={css.softerColor}>License:</span>
             {psychologist.license}
           </li>
-          <li className={css.advantagesItem}>
+          <li className={css.advantagesItem} key={psychologist.specialization}>
             <span className={css.softerColor}>Specialization:</span>
             {psychologist.specialization}
           </li>
-          <li className={css.advantagesItem}>
+          <li className={css.advantagesItem} key={psychologist.initial_consultation.slice(0, 5)}>
             <span className={css.softerColor}>Initial consultation: </span>
             {psychologist.initial_consultation}
           </li>
@@ -72,7 +72,7 @@ const PsychologistCard = ({ psychologist }: PsychologistCardProps) => {
           <>
             <ul className={css.reviewList}>
               {psychologist.reviews.map((review) => (
-                <li className={css.reviewWrapper}>
+                <li className={css.reviewWrapper} key={review.reviewer}>
                   <div className={css.reviewRatingWrapper}>
                     <div className={css.reviewLogo}>{review.comment.slice(0, 1)}</div>
                     <div className={css.reviewLogoRatingWrapper}>
