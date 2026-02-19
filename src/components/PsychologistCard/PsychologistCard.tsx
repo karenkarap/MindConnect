@@ -2,6 +2,9 @@ import { useState } from 'react';
 import type { Psychologist } from '../../types/psychologistsTypes';
 import SvgIcon from '../ui/icons/SvgIcon';
 import css from './PsychologistCard.module.css';
+import { useAuthStore } from '../../store/authStore';
+import { toggleFavorite } from '../../services/api/favorites';
+import toast from 'react-hot-toast';
 
 interface PsychologistCardProps {
   psychologist: Psychologist;
@@ -9,6 +12,30 @@ interface PsychologistCardProps {
 
 const PsychologistCard = ({ psychologist }: PsychologistCardProps) => {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const user = useAuthStore((state) => state.user);
+
+  const handleFavoriteButton = async (psychologistId: string) => {
+    if (user) {
+      try {
+        const res = await toggleFavorite(user.uid, psychologistId);
+        if (res.status === 'added') {
+          setIsFavorite(true);
+          toast.success('You added psychologist to your favorite!');
+        }
+        if (res.status === 'removed') {
+          setIsFavorite(false);
+          toast.success('You removed psychologist from your favorite list');
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error('something went wrong');
+      }
+    } else {
+      console.log('must be login');
+    }
+  };
 
   return (
     <li key={psychologist.id} className={css.listItem}>
@@ -33,8 +60,13 @@ const PsychologistCard = ({ psychologist }: PsychologistCardProps) => {
               Price / 1 hour: <span className={css.price}>{psychologist.price_per_hour}$</span>
             </p>
 
-            <button type="button" className={css.likeBtn}>
-              <SvgIcon name="like" width={26} height={26} />
+            <button
+              type="button"
+              className={css.likeBtn}
+              onClick={() => handleFavoriteButton(psychologist.id)}
+            >
+              <SvgIcon name={isFavorite ? 'activeLike' : 'like'} width={26} height={26} />
+              {/* {isFavorite ?<SvgIcon name='activeLike' width={26} height={26}/> : } */}
             </button>
           </div>
         </div>
