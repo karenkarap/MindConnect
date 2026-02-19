@@ -1,5 +1,5 @@
-import { db } from '../config/firebase';
-import type { ApiResponse, FilterSort, Psychologist } from '../types/psychologistsTypes';
+import { db } from '../../config/firebase';
+import type { ApiResponse, FilterSort, Psychologist } from '../../types/psychologistsTypes';
 import {
   collection,
   DocumentSnapshot,

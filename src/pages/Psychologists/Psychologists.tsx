@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getPsychologists } from '../../services/api';
+import { getPsychologists } from '../../services/api/api';
 import type { ApiResponse, FilterSort } from '../../types/psychologistsTypes';
 import Container from '../../components/Container/Container';
 import PsychologistsGrid from '../../components/PsychologistsGrid/PsychologistsGrid';

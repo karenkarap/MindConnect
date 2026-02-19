@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import css from './DesktopMenu.module.css';
 import Button from '../ui/Button/Button';
 import type { User } from 'firebase/auth';
-import { logOutUser } from '../../services/authApi';
+import { logOutUser } from '../../services/api/authApi';
 import SvgIcon from '../ui/icons/SvgIcon';
 
 interface DesktopMenuProps {

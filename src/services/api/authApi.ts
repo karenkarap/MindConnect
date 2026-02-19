@@ -5,8 +5,8 @@ import {
   updateProfile,
   type User,
 } from 'firebase/auth';
-import { auth } from '../config/firebase';
-import type { RegisterData, LoginData } from '../types/authTypes';
+import { auth } from '../../config/firebase';
+import type { RegisterData, LoginData } from '../../types/authTypes';
 
 export const registerUser = async ({ email, password, username }: RegisterData): Promise<User> => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);

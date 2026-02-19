@@ -4,7 +4,7 @@ import { IoClose } from 'react-icons/io5';
 import Button from '../ui/Button/Button';
 import { useEffect } from 'react';
 import type { User } from 'firebase/auth';
-import { logOutUser } from '../../services/authApi';
+import { logOutUser } from '../../services/api/authApi';
 
 interface MobileMenuProps {
   onClose: () => void;

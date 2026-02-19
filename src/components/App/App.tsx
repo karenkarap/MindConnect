@@ -8,9 +8,10 @@ import { useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import type { ModalType } from '../../types/modalType';
 import type { LoginData, RegisterData } from '../../types/authTypes';
-import { logInUser, registerUser } from '../../services/authApi';
+import { logInUser, registerUser } from '../../services/api/authApi';
 import { useAuthStore } from '../../store/authStore';
-import { initAuthListener } from '../../services/authListener';
+import { initAuthListener } from '../../services/api/authListener';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [modalType, setModalType] = useState<ModalType>(null);
@@ -62,6 +63,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       <SvgSprite />
       <Header onLogin={openModalLogin} onRegister={openModalRegister} />
       <main>
