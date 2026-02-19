@@ -61,3 +61,15 @@ export const getFavoritePsychologists = async (userId: string) => {
 
   return psychologists;
 };
+
+export const getFavoriteIds = async (userId: string): Promise<string[]> => {
+  const favRef = collection(db, 'users', userId, 'favorites');
+
+  const snapshot = await getDocs(favRef);
+
+  if (snapshot.empty) {
+    return [];
+  }
+
+  return snapshot.docs.map((doc) => doc.id);
+};

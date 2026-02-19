@@ -2,40 +2,17 @@ import { useState } from 'react';
 import type { Psychologist } from '../../types/psychologistsTypes';
 import SvgIcon from '../ui/icons/SvgIcon';
 import css from './PsychologistCard.module.css';
-import { useAuthStore } from '../../store/authStore';
-import { toggleFavorite } from '../../services/api/favorites';
-import toast from 'react-hot-toast';
+import useFavoriteIds from '../../hooks/useFavoriteIds';
 
 interface PsychologistCardProps {
   psychologist: Psychologist;
+  onFavorite: (psychologistId: string) => void;
+  disabledButton: boolean;
 }
 
-const PsychologistCard = ({ psychologist }: PsychologistCardProps) => {
+const PsychologistCard = ({ psychologist, onFavorite, disabledButton }: PsychologistCardProps) => {
   const [openId, setOpenId] = useState<string | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const user = useAuthStore((state) => state.user);
-
-  const handleFavoriteButton = async (psychologistId: string) => {
-    if (user) {
-      try {
-        const res = await toggleFavorite(user.uid, psychologistId);
-        if (res.status === 'added') {
-          setIsFavorite(true);
-          toast.success('You added psychologist to your favorite!');
-        }
-        if (res.status === 'removed') {
-          setIsFavorite(false);
-          toast.success('You removed psychologist from your favorite list');
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error('something went wrong');
-      }
-    } else {
-      console.log('must be login');
-    }
-  };
+  const { isFavorite } = useFavoriteIds();
 
   return (
     <li key={psychologist.id} className={css.listItem}>
@@ -63,10 +40,14 @@ const PsychologistCard = ({ psychologist }: PsychologistCardProps) => {
             <button
               type="button"
               className={css.likeBtn}
-              onClick={() => handleFavoriteButton(psychologist.id)}
+              onClick={() => onFavorite(psychologist.id)}
+              disabled={disabledButton}
             >
-              <SvgIcon name={isFavorite ? 'activeLike' : 'like'} width={26} height={26} />
-              {/* {isFavorite ?<SvgIcon name='activeLike' width={26} height={26}/> : } */}
+              {isFavorite(psychologist.id) ? (
+                <SvgIcon name="activeLike" width={26} height={26} />
+              ) : (
+                <SvgIcon name="like" width={26} height={26} />
+              )}
             </button>
           </div>
         </div>

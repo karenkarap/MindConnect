@@ -7,9 +7,14 @@ import css from './Psychologists.module.css';
 import { useState } from 'react';
 import type { DocumentSnapshot } from 'firebase/firestore';
 import Dropdown from '../../components/ui/Dropdown/Dropdown';
+import { useAuthStore } from '../../store/authStore';
+import toast from 'react-hot-toast';
+import useFavoriteMutation from '../../hooks/useFavoriteMutation';
 
 const Psychologists = () => {
   const [filterSort, setFilterSort] = useState<FilterSort>('All');
+  const mutation = useFavoriteMutation();
+  const user = useAuthStore((state) => state.user);
 
   const { data, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: ['psychologists', filterSort],
@@ -18,6 +23,14 @@ const Psychologists = () => {
     initialPageParam: null as DocumentSnapshot | null,
     getNextPageParam: (lastPage: ApiResponse) => lastPage.nextCursor,
   });
+
+  const handleToogleFavorite = (psychologistId: string) => {
+    if (!user) {
+      toast.error('Please login');
+      return;
+    }
+    mutation.mutate(psychologistId);
+  };
 
   const handleFilter = (value: FilterSort) => {
     setFilterSort(value);
@@ -28,10 +41,15 @@ const Psychologists = () => {
   return (
     <section className={css.section}>
       <Container>
-        {isLoading && <h2>Loading ...</h2>}
         <Dropdown value={filterSort} onFilter={handleFilter} />
-        {allPsychologists && <PsychologistsGrid psychologists={allPsychologists} />}
-        <button onClick={() => fetchNextPage()} className={css.loadMoreBtn}>
+        {allPsychologists && (
+          <PsychologistsGrid
+            psychologists={allPsychologists}
+            onFavorite={handleToogleFavorite}
+            disabledButton={mutation.isPending}
+          />
+        )}
+        <button onClick={() => fetchNextPage()} className={css.loadMoreBtn} disabled={isLoading}>
           Load more
         </button>
       </Container>

@@ -25,13 +25,13 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
-
   const openModalRegister = () => {
     setModalType('register');
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const openModalLogin = () => {
     setModalType('login');
