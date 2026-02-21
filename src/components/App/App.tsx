@@ -63,7 +63,7 @@ function App() {
 
   return (
     <>
-      <Toaster />
+      <Toaster position="top-right" />
       <SvgSprite />
       <Header onLogin={openModalLogin} onRegister={openModalRegister} />
       <main>

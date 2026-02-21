@@ -3,6 +3,7 @@ import type { Psychologist } from '../../types/psychologistsTypes';
 import SvgIcon from '../ui/icons/SvgIcon';
 import css from './PsychologistCard.module.css';
 import useFavoriteIds from '../../hooks/useFavoriteIds';
+import PopUp from '../PopUp/PopUp';
 
 interface PsychologistCardProps {
   psychologist: Psychologist;
@@ -12,7 +13,12 @@ interface PsychologistCardProps {
 
 const PsychologistCard = ({ psychologist, onFavorite, disabledButton }: PsychologistCardProps) => {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [isPopUp, setIsPopUp] = useState(false);
   const { isFavorite } = useFavoriteIds();
+
+  const handlePopUp = () => {
+    setIsPopUp(!isPopUp);
+  };
 
   return (
     <li key={psychologist.id} className={css.listItem}>
@@ -101,12 +107,15 @@ const PsychologistCard = ({ psychologist, onFavorite, disabledButton }: Psycholo
                 </li>
               ))}
             </ul>
-            <button type="button" className={css.appointmentBtn}>
+            <button type="button" className={css.appointmentBtn} onClick={handlePopUp}>
               Make an appointment
             </button>
           </>
         )}
       </div>
+      {isPopUp && (
+        <PopUp onClose={handlePopUp} img={psychologist.avatar_url} name={psychologist.name} />
+      )}
     </li>
   );
 };
