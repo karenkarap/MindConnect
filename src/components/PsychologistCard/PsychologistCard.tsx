@@ -77,6 +77,7 @@ const PsychologistCard = ({ psychologist, onFavorite, disabledButton }: Psycholo
         </ul>
 
         <p className={css.description}>{psychologist.about}</p>
+
         {openId !== psychologist.id && (
           <button
             type="button"
