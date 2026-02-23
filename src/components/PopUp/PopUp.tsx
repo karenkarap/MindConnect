@@ -3,6 +3,8 @@ import SvgIcon from '../ui/icons/SvgIcon';
 import css from './PopUp.module.css';
 import AppointmentForm from './AppointmentForm';
 import type { AppointmentFormData } from '../../types/authTypes';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 interface PopUpProps {
   onClose: () => void;
@@ -13,10 +15,33 @@ interface PopUpProps {
 const PopUp = ({ onClose, img, name }: PopUpProps) => {
   const handleForm = (data: AppointmentFormData) => {
     console.log(data);
+    toast.success('Your appointment has been booked!');
+    onClose();
+  };
+
+  useEffect(() => {
+    const hadleEscPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', hadleEscPress);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', hadleEscPress);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   return createPortal(
-    <div className={css.backdrop}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
         <button type="button" className={css.closeBtn} onClick={onClose}>
           <SvgIcon name="close" width={32} height={32} />
