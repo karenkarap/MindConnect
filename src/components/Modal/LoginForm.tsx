@@ -12,16 +12,16 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({ onSubmit }: LoginFormProps) => {
-  const [showPassword, setSetshowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
-    setSetshowPassword(!showPassword);
+    setShowPassword(!showPassword);
   };
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
   } = useForm<LoginData>({
     resolver: yupResolver(LoginSchema),
     mode: 'onBlur',
@@ -51,7 +51,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         <p className={css.error}>{errors.password?.message}</p>
       </div>
 
-      <button type="submit" className={css.button} disabled={!isValid || isSubmitting}>
+      <button type="submit" className={css.button} disabled={isSubmitting}>
         {isSubmitting ? (
           <RotatingLines
             visible={true}
