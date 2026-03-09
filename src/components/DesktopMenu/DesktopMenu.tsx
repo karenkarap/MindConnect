@@ -2,16 +2,16 @@ import { NavLink } from 'react-router-dom';
 import css from './DesktopMenu.module.css';
 import Button from '../ui/Button/Button';
 import type { User } from 'firebase/auth';
-import { logOutUser } from '../../services/api/authApi';
 import SvgIcon from '../ui/icons/SvgIcon';
 
 interface DesktopMenuProps {
   user: User | null;
   onLogin: () => void;
   onRegister: () => void;
+  handleLogout: () => void;
 }
 
-const DesktopMenu = ({ user, onLogin, onRegister }: DesktopMenuProps) => {
+const DesktopMenu = ({ user, onLogin, onRegister, handleLogout }: DesktopMenuProps) => {
   return (
     <>
       <nav className={css.navWrapper}>
@@ -55,7 +55,7 @@ const DesktopMenu = ({ user, onLogin, onRegister }: DesktopMenuProps) => {
               <p>{user.displayName}</p>
             </div>
 
-            <Button text="Log out" color="transparent" onClick={() => logOutUser()} />
+            <Button text="Log out" color="transparent" onClick={handleLogout} />
           </>
         ) : (
           <>
