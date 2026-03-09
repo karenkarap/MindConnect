@@ -17,7 +17,7 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
   } = useForm<RegisterData>({
     resolver: yupResolver(RegistrationSchema),
     mode: 'onBlur',
@@ -62,7 +62,7 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         <p className={css.error}>{errors.password?.message}</p>
       </div>
 
-      <button type="submit" className={css.button} disabled={!isValid || isSubmitting}>
+      <button type="submit" className={css.button} disabled={isSubmitting}>
         {isSubmitting ? (
           <RotatingLines
             visible={true}

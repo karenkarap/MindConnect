@@ -16,7 +16,7 @@ const Psychologists = () => {
   const mutation = useFavoriteMutation();
   const user = useAuthStore((state) => state.user);
 
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['psychologists', filterSort],
     queryFn: ({ pageParam }: { pageParam: DocumentSnapshot | null }) =>
       getPsychologists({ pageParam, filterSort }),
@@ -49,9 +49,11 @@ const Psychologists = () => {
             disabledButton={mutation.isPending}
           />
         )}
-        <button onClick={() => fetchNextPage()} className={css.loadMoreBtn} disabled={isLoading}>
-          Load more
-        </button>
+        {hasNextPage && !isLoading && (
+          <button onClick={() => fetchNextPage()} className={css.loadMoreBtn}>
+            Load more
+          </button>
+        )}
       </Container>
     </section>
   );

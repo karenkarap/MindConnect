@@ -18,6 +18,7 @@ const PsychologistCard = ({ psychologist, onFavorite, disabledButton }: Psycholo
 
   const handlePopUp = () => {
     setIsPopUp(!isPopUp);
+    setOpenId(null);
   };
 
   return (
